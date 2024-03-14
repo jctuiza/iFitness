@@ -723,7 +723,8 @@ a {
 
 @media only screen and (width < 600px) {
   .col-left {
-    margin-left: 20rem;
+	margin-right: -160px;
+    margin-left: 1rem;
     width: 90%;
 		height: 160vh;
 		padding: 10px;
