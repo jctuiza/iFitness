@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/workout/workout.css">
+    <script src="https://kit.fontawesome.com/411e9dc743.js" crossorigin="anonymous"></script>
+    <title>Shoulder Workout | Weight | iFitness</title>
+</head>
+<body>
+    <!-- Header -->
+    <section id="header">
+        <div class="header container">
+          <div class="nav-bar">
+            <div class="brand">
+              <a href="/index.html">
+                <h1><span>i</span>Fit<span>N</span>ess</h1>
+              </a>
+            </div>
+            <div class="nav-list">
+                <div class="tap-toggle">
+                    <i class="fa-brands fa-spotify" style="color: #2d862e;"></i>
+                    <div class="miniplayer">
+                        <section id="music-section" style="display: none;">
+                            <iframe class="music-container" style="border-radius: 12px;" src="https://open.spotify.com/embed/playlist/2SM6rniZl84fEyMCB5KMQB?utm_source=generator" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                            <div class="clear"></div>
+                        </section>
+                    </div>
+                </div>
+                <div class="hamburger">
+                    <div class="bar"></div>
+                </div>
+              <ul>
+                <li><a href="/index.html#home" data-after="Home">Home</a></li>
+                <li><a href="/index.html#about" data-after="Music">Music</a></li>
+                <li><a href="/index.html#projects" data-after="Projects">Workout Sheet</a></li>
+                <li><a href="/index.html#services" data-after="Service">Services</a></li>
+                <li><a href="/index.html#contact" data-after="Contact">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    </section>
+    
+      <!-- End Header -->
+    <div class="container">
+        <div class="col-left">
+            <div class="image-container">
+                <img id="myImage" src="/workout/bg.jpg" alt="Back cover">
+            </div>
+        </div>
+        <div class="col-right">
+            <p id="message"></p>
+            <div class="time">
+                <div class="exerciseTime">
+                    <h2 class="workoutText">Workout time:</h2>
+                    <span class="digit" id="EThr">00</span> <!--ET means Exercise Time-->
+                    <span class="stopwatchText">Hr</span>
+                    <span class="digit" id="ETmin">00</span>
+                    <span class="stopwatchText">Min</span>
+                    <span class="digit" id="ETsec">00</span>
+                    <span class="stopwatchText">Sec</span>
+                </div>
+            </div>
+            <div class="time">
+                <div class="restTime">
+                    <h2 class="restText">Rest time:</h2>
+                    <span class="digit" id="RThr">00</span> <!--RT means Rest Time-->
+                    <span class="stopwatchText">Hr</span>
+                    <span class="digit" id="RTmin">00</span>
+                    <span class="stopwatchText">Min</span>
+                    <span class="digit" id="RTsec">00</span>
+                    <span class="stopwatchText">Sec</span>
+                </div>
+            </div>
+            
+            <div id="buttonContainer">
+                <button id="change-word-button">Start</button>
+                <button id="rest-button">Rest?</button>
+                <button id="reset">Reset</button>
+            </div>
+            <div class="totalTime">
+                <h2 class="totalText">Total time</h2>
+                <div class="timeElements">
+                    <span class="digit" id="TThr">00</span> <!--TT means Total Time-->
+                    <span class="stopwatchText">Hr</span>
+                    <span class="digit" id="TTmin">00</span>
+                    <span class="stopwatchText">Min</span>
+                    <span class="digit" id="TTsec">00</span>
+                    <span class="stopwatchText">Sec</span>
+                </div>
+            </div>
+
+            <div class="show-toggle">
+                <button class="show">Show Workouts</button>
+            </div>
+
+            <div class="workout-list">
+                <div class="workoutGrid">
+                    <div class="word" id="word1">Arnold Press</div>
+                    <div class="word" id="word2">Barbell Overhead Press</div>
+                    <div class="word" id="word3">Barbell Shrugs</div>
+                    <div class="word" id="word4">Dumbbell Front Raises</div>
+                    <div class="word" id="word5">Dumbbell Lateral Raises</div>
+                    <div class="word" id="word6">Dumbbell Rear Delt Flyes</div>
+                    <div class="word" id="word7">Dumbbell Shoulder Press</div>
+                    <div class="word" id="word8">Plate Front Raises</div>
+                    <div class="word" id="word9">Single Arm Dumbbell Press</div>
+                    <div class="word" id="word10">Upright Rows</div>
+                    <div class="word" id="word11">Good job</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <script>
+        const words = ["word1", "word2", "word3", "word4", "word5", "word6", "word7", "word8", "word9", "word10", "word11",];
+        const imagePaths = [
+            "/workout/shoulder/weight/arnold-press.gif",
+            "/workout/shoulder/weight/barbell-overhead-press.gif",
+            "/workout/shoulder/weight/barbell-shrugs.gif",
+            "/workout/shoulder/weight/dumbbell-frontraises.gif",
+            "/workout/shoulder/weight/dumbbell-lateralraises.gif",
+            "/workout/shoulder/weight/dumbbell-reardelt-flyes.gif",
+            "/workout/shoulder/weight/dumbbell-shoulder-press.gif",
+            "/workout/shoulder/weight/plate-frontraises.gif",
+            "/workout/shoulder/weight/singlearm-dumbbell-press.gif",
+            "/workout/shoulder/weight/upright-rows.gif",
+            "/workout/good-job.jpg"
+            // Add more image paths here (up to word10)
+        ];
+    
+        let currentWordIndex = 0;
+        let workoutTimer;
+        let restTimer;
+        let totalTimer;
+        let workoutTime = 0;
+        let restTime = 0;
+        let totalTime = 0;
+        let show;
+    
+        const buttonElement = document.getElementById("change-word-button");
+        const restButtonElement = document.getElementById("rest-button");
+        const messageElement = document.getElementById("message");
+        const imageElement = document.getElementById("myImage");
+    
+        buttonElement.addEventListener("click", () => {
+            if (currentWordIndex < words.length) {
+                const currentWord = words[currentWordIndex];
+                const imagePath = imagePaths[currentWordIndex];
+                imageElement.src = imagePath;
+                document.getElementById(`word${currentWordIndex + 1}`).classList.add("highlighted");
+                if (currentWordIndex > 0) {
+                    document.getElementById(`word${currentWordIndex}`).classList.add("strikethrough");
+                }
+                currentWordIndex++;
+            }
+    
+            if (currentWordIndex === words.length) {
+                buttonElement.disabled = true;
+                messageElement.textContent = "Good job! Session #1, completed.";
+                document.getElementById("completion-message").style.display = "block";
+                imageElement.src = "goodjob.png";
+                document.getElementsByClassName("totalTime").style.display =("block");
+            } else {
+                buttonElement.textContent = "Continue?";
+                startWorkout();
+                updateWorkoutTimer();
+                totalWorkout();
+                updateTotalTimer();
+            }
+        });
+
+        buttonElement.addEventListener("click", startWorkout);
+        restButtonElement.addEventListener("click", startRestTimer);
+        document.getElementById("reset").addEventListener("click", resetTimers);
+      
+        function startWorkout() {
+            clearInterval(restTimer);
+            restTime = 0;
+            restButtonElement.disabled = false;
+            workoutTime = 0;
+            const minutes = Math.floor(workoutTime / 60);
+            const seconds = workoutTime % 60;
+            document.getElementById("ETmin").textContent = padTime(minutes);
+            document.getElementById("ETsec").textContent = padTime(seconds);
+
+            clearInterval(workoutTimer);
+            workoutTimer = setInterval(updateWorkoutTimer, 1000);
+
+            if (!totalTimer) {
+                totalTimer = setInterval(updateTotalTimer, 1000);
+            }
+        }
+
+        function startRestTimer() {
+            clearInterval(workoutTimer);
+            workoutTime = 0;
+            buttonElement.disabled = false;
+
+            clearInterval(restTimer);
+            restTimer = setInterval(updateRestTimer, 1000);
+        }
+
+        function updateWorkoutTimer() {
+            if (currentWordIndex < words.length) {
+                workoutTime++;
+                const minutes = Math.floor(workoutTime / 60);
+                const seconds = workoutTime % 60;
+                document.getElementById("ETmin").textContent = padTime(minutes);
+                document.getElementById("ETsec").textContent = padTime(seconds);
+            }
+        }
+
+        function updateRestTimer() {
+            if (currentWordIndex < words.length) {
+                restTime++;
+                const minutes = Math.floor(restTime / 60);
+                const seconds = restTime % 60;
+                document.getElementById("RTmin").textContent = padTime(minutes);
+                document.getElementById("RTsec").textContent = padTime(seconds);
+            }
+        }
+
+        function updateTotalTimer() {
+            if (currentWordIndex < words.length) {
+                totalTime++;
+                const minutes = Math.floor(totalTime / 60);
+                const seconds = totalTime % 60;
+                document.getElementById("TTmin").textContent = padTime(minutes);
+                document.getElementById("TTsec").textContent = padTime(seconds);
+            }
+        }
+
+        function resetTimers() {
+            clearInterval(workoutTimer);
+            clearInterval(restTimer);
+            clearInterval(totalTimer)
+            workoutTime = 0;
+            restTime = 0;
+            totalTime = 0;
+            document.getElementById("ETmin").textContent = "00";
+            document.getElementById("ETsec").textContent = "00";
+            document.getElementById("RTmin").textContent = "00";
+            document.getElementById("RTsec").textContent = "00";
+            buttonElement.disabled = false;
+            restButtonElement.disabled = true;
+        }
+
+        function padTime(time) {
+            return time < 10 ? "0" + time : time;
+        }
+
+        function toggleWorkoutGrid() {
+            document.getElementById("workoutDropdown").classList.toggle("show");
+        }
+
+        const hamburger = document.querySelector('.header .nav-bar .nav-list .hamburger');
+        const mobile_menu = document.querySelector('.header .nav-bar .nav-list ul');
+        const menu_item = document.querySelectorAll('.header .nav-bar .nav-list ul li a');
+        const header = document.querySelector('.header.container');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobile_menu.classList.toggle('active');
+        });
+
+        document.addEventListener('scroll', () => {
+            var scroll_position = window.scrollY;
+            if (scroll_position > 250) {
+                header.style.backgroundColor = '#29323c';
+            } else {
+                header.style.backgroundColor = 'transparent';
+            }
+        });
+
+        menu_item.forEach((item) => {
+            item.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                mobile_menu.classList.toggle('active');
+            });
+        });
+
+        const musicSection = document.getElementById("music-section");
+        const musicIcon = document.querySelector('.tap-toggle');
+
+        musicIcon.addEventListener('click', () => {
+            musicSection.classList.toggle('open'); // Toggle the "open" class on the music section
+
+            const isOpened = musicSection.classList.contains('open');
+            musicIcon.querySelector('i').className = isOpened ? 'fa-brands fa-spotify active' : 'fa-brands fa-spotify';
+
+            // Toggle display property after the transition ends
+            if (isOpened) {
+                musicSection.style.display = "block"; // Show the music section
+            } else {
+                musicSection.addEventListener('transitionend', () => {
+                    if (!musicSection.classList.contains('open')) {
+                        musicSection.style.display = 'none'; // Hide the music section after transition ends
+                    }
+                }, { once: true }); // Remove event listener after it's fired once
+            }
+        });
+
+        const showToggle = document.querySelector('.show-toggle');
+        const workoutList = document.querySelector('.workout-list');
+
+        showToggle.onclick = function () {
+            workoutList.classList.toggle('open');
+            const isOpened = workoutList.classList.contains('open');
+
+        showToggle.querySelector('button').textContent = isOpened ? 'Hide Workouts' : 'Show Workouts';
+        };
+  </script>
+</body>
+</html>
