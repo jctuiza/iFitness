@@ -731,18 +731,18 @@ a {
   }
   .image-container {
     margin-right: 50rem;
-    margin-left: 18.8rem;
+    margin-left: 21.5rem;
     margin-top: -2rem;
 		height: 40%;
 		width: 98%;
   }
   .col-right {
     margin-right: 22rem;
-    margin-top: 55rem;
+    margin-top: 52rem;
   }
   .time {
     width: 180%;
-    margin-left: -28.4rem;
+    margin-left: -10.6rem;
   }
   .exerciseTime .workoutText {
     font-size: 2rem;
@@ -759,7 +759,7 @@ a {
     height: auto;
     display: block;
     margin-top: 0.8rem;
-    margin-left: -13.4rem;
+    margin-left: 5.2rem;
   }
   .totalText .timeElements {
     font-size: 100px;
@@ -769,11 +769,11 @@ a {
     width: 95px;
     height: 50px;
     font-size: 1.5rem;
-    margin-right: 16rem;
-    margin-left: -14.5rem;
+    margin-right: -2rem;
+    margin-left: 4rem;
   }
   .show {
-    margin-left: -13rem;
+    margin-left: 6rem;
     margin-top: -1rem;
   }
 	.show-toggle {
@@ -782,11 +782,11 @@ a {
 	}
   #message {
     font-size: 1.5rem;
-    margin-left: -29rem;
+    margin-left: 8rem;
   }
   .workout-list {
     font-size: 2rem;
-    margin-left: -13rem;
+    margin-left: 5.8rem;
     margin-top: -1rem;
   }
   .music-container {
